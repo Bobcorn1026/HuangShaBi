@@ -1,27 +1,118 @@
-[gd_scene format=3 uid="uid://home_page_placeholder_4"]
+[gd_scene format=3 uid="uid://db2tun0o1vjr6"]
 
-[node name="Page4" type="Control"]
+[ext_resource type="Texture2D" uid="uid://dtwpl53oowym4" path="res://asset/ChatGPT Image 2026年5月7日 上午08_27_35.png" id="1_jsrpx"]
+[ext_resource type="Script" uid="uid://lhukfm5p4lcm" path="res://scenes/pages/Page4.gd" id="1_v7c1w"]
+
+[node name="Page4" type="Control" unique_id=1293823641]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_v7c1w")
 
-[node name="Label" type="Label" parent="."]
+[node name="BackgroundSlot" type="Panel" parent="." unique_id=71492554]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -120.0
-offset_top = -24.0
-offset_right = 120.0
-offset_bottom = 24.0
+offset_left = -540.0
+offset_top = -960.0
+offset_right = 540.0
+offset_bottom = 852.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 28
-text = "頁面 4"
+mouse_filter = 2
+
+[node name="BackgroundImage" type="TextureRect" parent="BackgroundSlot" unique_id=1146270629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_jsrpx")
+stretch_mode = 5
+
+[node name="PageContent" type="VBoxContainer" parent="." unique_id=2065294414]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ModeBar" type="HBoxContainer" parent="PageContent" unique_id=1193405265]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="RestartButton" type="Button" parent="PageContent/ModeBar" unique_id=1492762217]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "重新出發"
+
+[node name="MilestoneButton" type="Button" parent="PageContent/ModeBar" unique_id=1519669324]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "里程碑"
+
+[node name="ToolButton" type="Button" parent="PageContent/ModeBar" unique_id=2024992658]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "工具"
+
+[node name="LevelButton" type="Button" parent="PageContent/ModeBar" unique_id=1225979266]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "等級"
+
+[node name="DrawerHost" type="MarginContainer" parent="PageContent" unique_id=1624668060]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="UpgradeDrawer" type="PanelContainer" parent="PageContent/DrawerHost" unique_id=1624668060]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_minimum_size = Vector2(300, 0)
+
+[node name="DrawerContent" type="VBoxContainer" parent="PageContent/DrawerHost/UpgradeDrawer" unique_id=1938734473]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="DrawerTitle" type="Label" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1767062938]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "重新出發"
 horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="DrawerSubtitle" type="Label" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1439754357]
+layout_mode = 2
+text = "重新開始時，先把開局節奏調順。"
+horizontal_alignment = 1
+
+[node name="OptionList" type="VBoxContainer" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1664238259]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[connection signal="pressed" from="PageContent/ModeBar/RestartButton" to="." method="_on_mode_button_pressed" binds= ["restart"]]
+[connection signal="pressed" from="PageContent/ModeBar/MilestoneButton" to="." method="_on_mode_button_pressed" binds= ["milestone"]]
+[connection signal="pressed" from="PageContent/ModeBar/ToolButton" to="." method="_on_mode_button_pressed" binds= ["tool"]]
+[connection signal="pressed" from="PageContent/ModeBar/LevelButton" to="." method="_on_mode_button_pressed" binds= ["level"]]
