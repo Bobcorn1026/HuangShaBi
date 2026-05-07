@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emvq1xfwqv6"
-path="res://.godot/imported/crouch_attacks.png-422e03170700a702adadfe0e51f0516f.ctex"
+uid="uid://jg488ug7d6ph"
+path="res://.godot/imported/seven_segment_orange_02_16×16px.png-63116622b8fad2fad5c73020f50127e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/character/mine/crouch_attacks.png"
-dest_files=["res://.godot/imported/crouch_attacks.png-422e03170700a702adadfe0e51f0516f.ctex"]
+source_file="res://asset/TempTexure/seven_segment_orange_02_16×16px.png"
+dest_files=["res://.godot/imported/seven_segment_orange_02_16×16px.png-63116622b8fad2fad5c73020f50127e8.ctex"]
 
 [params]
 
