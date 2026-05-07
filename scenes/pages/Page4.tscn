@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://db2tun0o1vjr6"]
 
-[ext_resource type="Texture2D" uid="uid://dtwpl53oowym4" path="res://asset/ChatGPT Image 2026年5月7日 上午08_27_35.png" id="1_jsrpx"]
 [ext_resource type="Script" uid="uid://lhukfm5p4lcm" path="res://scenes/pages/Page4.gd" id="1_v7c1w"]
+[ext_resource type="Texture2D" uid="uid://0qc4r5jeilyg" path="res://asset/TempTexure/ChatGPT Image 2026年5月7日 上午10_49_38.png" id="2_8kico"]
+[ext_resource type="FontFile" uid="uid://bgsy5idubh3xg" path="res://asset/font/Cubic_11.ttf" id="3_8kico"]
 
 [node name="Page4" type="Control" unique_id=1293823641]
 layout_mode = 3
@@ -35,8 +36,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_jsrpx")
-stretch_mode = 5
+texture = ExtResource("2_8kico")
+stretch_mode = 6
 
 [node name="PageContent" type="VBoxContainer" parent="." unique_id=2065294414]
 layout_mode = 1
@@ -47,72 +48,133 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="ModeBar" type="HBoxContainer" parent="PageContent" unique_id=1193405265]
+[node name="MenuOverlay" type="PanelContainer" parent="PageContent" unique_id=1624668060]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 12
 
-[node name="RestartButton" type="Button" parent="PageContent/ModeBar" unique_id=1492762217]
-custom_minimum_size = Vector2(0, 52)
+[node name="MenuContent" type="VBoxContainer" parent="PageContent/MenuOverlay" unique_id=1938734473]
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-text = "重新出發"
+theme_override_constants/separation = 5
 
-[node name="MilestoneButton" type="Button" parent="PageContent/ModeBar" unique_id=1519669324]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-text = "里程碑"
-
-[node name="ToolButton" type="Button" parent="PageContent/ModeBar" unique_id=2024992658]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-text = "工具"
-
-[node name="LevelButton" type="Button" parent="PageContent/ModeBar" unique_id=1225979266]
-custom_minimum_size = Vector2(0, 52)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-text = "等級"
-
-[node name="DrawerHost" type="MarginContainer" parent="PageContent" unique_id=1624668060]
+[node name="MenuBackground" type="Panel" parent="PageContent/MenuOverlay/MenuContent" unique_id=2048576000]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_right = 32
+mouse_filter = 1
 
-[node name="UpgradeDrawer" type="PanelContainer" parent="PageContent/DrawerHost" unique_id=1624668060]
+[node name="HeaderBar" type="HBoxContainer" parent="PageContent/MenuOverlay/MenuContent" unique_id=9999]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_minimum_size = Vector2(300, 0)
 
-[node name="DrawerContent" type="VBoxContainer" parent="PageContent/DrawerHost/UpgradeDrawer" unique_id=1938734473]
+[node name="DrawerTitle" type="Label" parent="PageContent/MenuOverlay/MenuContent/HeaderBar" unique_id=1767062938]
 layout_mode = 2
-theme_override_constants/separation = 14
-
-[node name="DrawerTitle" type="Label" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1767062938]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 40
 text = "重新出發"
 horizontal_alignment = 1
 
-[node name="DrawerSubtitle" type="Label" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1439754357]
+[node name="CloseButton" type="Button" parent="PageContent/MenuOverlay/MenuContent/HeaderBar" unique_id=8888]
+custom_minimum_size = Vector2(52, 52)
 layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 28
+text = "✕"
+
+[node name="DrawerSubtitle" type="Label" parent="PageContent/MenuOverlay/MenuContent" unique_id=1439754357]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 22
 text = "重新開始時，先把開局節奏調順。"
 horizontal_alignment = 1
 
-[node name="OptionList" type="VBoxContainer" parent="PageContent/DrawerHost/UpgradeDrawer/DrawerContent" unique_id=1664238259]
+[node name="OptionList" type="VBoxContainer" parent="PageContent/MenuOverlay/MenuContent" unique_id=1664238259]
+custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 50
 
-[connection signal="pressed" from="PageContent/ModeBar/RestartButton" to="." method="_on_mode_button_pressed" binds= ["restart"]]
-[connection signal="pressed" from="PageContent/ModeBar/MilestoneButton" to="." method="_on_mode_button_pressed" binds= ["milestone"]]
-[connection signal="pressed" from="PageContent/ModeBar/ToolButton" to="." method="_on_mode_button_pressed" binds= ["tool"]]
-[connection signal="pressed" from="PageContent/ModeBar/LevelButton" to="." method="_on_mode_button_pressed" binds= ["level"]]
+[node name="DrawerHost" type="MarginContainer" parent="PageContent" unique_id=1071467352]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 0
+
+[node name="RestartButton" type="Button" parent="." unique_id=1492762217]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.411
+anchor_top = 0.14
+anchor_right = 0.411
+anchor_bottom = 0.14
+offset_left = 0.11999512
+offset_top = -79.79999
+offset_right = 316.12
+offset_bottom = 394.2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 24
+text = "重新出發"
+autowrap_mode = 3
+autowrap_trim_flags = 0
+
+[node name="MilestoneButton" type="Button" parent="." unique_id=1519669324]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 0
+offset_left = 16.0
+offset_top = 781.0
+offset_right = 321.0
+offset_bottom = 1065.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 24
+text = "里程碑"
+
+[node name="ToolButton" type="Button" parent="." unique_id=2024992658]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 0
+offset_left = 792.0
+offset_top = 648.0
+offset_right = 1040.0
+offset_bottom = 1064.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 24
+text = "工具"
+
+[node name="LevelButton" type="Button" parent="." unique_id=1225979266]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76100004
+anchor_top = 0.133
+anchor_right = 0.76100004
+anchor_bottom = 0.133
+offset_left = 0.11993408
+offset_top = -79.36
+offset_right = 240.11993
+offset_bottom = 275.64
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_8kico")
+theme_override_font_sizes/font_size = 24
+text = "等級"
+
+[connection signal="pressed" from="PageContent/MenuOverlay/MenuContent/HeaderBar/CloseButton" to="." method="_on_close_menu"]
+[connection signal="pressed" from="RestartButton" to="." method="_on_mode_button_pressed" binds= ["restart"]]
+[connection signal="pressed" from="MilestoneButton" to="." method="_on_mode_button_pressed" binds= ["milestone"]]
+[connection signal="pressed" from="ToolButton" to="." method="_on_mode_button_pressed" binds= ["tool"]]
+[connection signal="pressed" from="LevelButton" to="." method="_on_mode_button_pressed" binds= ["level"]]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c34ny5bqtx3pw"
-path="res://.godot/imported/map1.png-3962f0aa7f0647c6938e398301a34746.ctex"
+uid="uid://0qc4r5jeilyg"
+path="res://.godot/imported/ChatGPT Image 2026年5月7日 上午10_49_38.png-1eda78e99a51fc3fa6c6569c8e5a67be.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/background/map1.png"
-dest_files=["res://.godot/imported/map1.png-3962f0aa7f0647c6938e398301a34746.ctex"]
+source_file="res://asset/TempTexure/ChatGPT Image 2026年5月7日 上午10_49_38.png"
+dest_files=["res://.godot/imported/ChatGPT Image 2026年5月7日 上午10_49_38.png-1eda78e99a51fc3fa6c6569c8e5a67be.ctex"]
 
 [params]
 
