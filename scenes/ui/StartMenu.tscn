@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://startmenu01"]
 
 [ext_resource type="Script" uid="uid://c5k6tlep8bvcd" path="res://scenes/ui/StartMenu.gd" id="1_sm"]
+[ext_resource type="FontFile" uid="uid://bgsy5idubh3xg" path="res://asset/font/Cubic_11.ttf" id="2_y35d7"]
 
 [node name="StartMenu" type="Control" unique_id=316107348]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sm")
@@ -28,11 +31,15 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=209412845]
 layout_mode = 2
-text = "番茄專注"
+theme_override_fonts/font = ExtResource("2_y35d7")
+theme_override_font_sizes/font_size = 100
+text = "瘋狂垃圾場"
 horizontal_alignment = 1
 
 [node name="GoldLabel" type="Label" parent="VBoxContainer" unique_id=1431796076]
+visible = false
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "金幣：0"
 horizontal_alignment = 1
 
@@ -40,6 +47,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+theme_override_font_sizes/font_size = 30
 text = "開始專注（25 分鐘）"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

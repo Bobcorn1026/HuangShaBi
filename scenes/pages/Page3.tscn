@@ -1,0 +1,158 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2ermtpqjw05q"]
+
+[ext_resource type="Script" uid="uid://cvtjvqm4plh64" path="res://scenes/pages/Page3.gd" id="1_p3"]
+[ext_resource type="FontFile" uid="uid://bgsy5idubh3xg" path="res://asset/font/Cubic_11.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://c34ny5bqtx3pw" path="res://asset/background/map1.png" id="3_map"]
+
+[node name="Page3" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Header" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 36
+text = "掛機地圖 — 拖曳平移，點選地區"
+horizontal_alignment = 1
+
+[node name="MapViewport" type="Control" parent="VBox"]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapRoot" type="Control" parent="VBox/MapViewport"]
+custom_minimum_size = Vector2(3000, 3000)
+anchors_preset = 0
+
+[node name="MapImage" type="TextureRect" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_right = 3000.0
+offset_bottom = 3000.0
+mouse_filter = 2
+texture = ExtResource("3_map")
+expand_mode = 1
+
+[node name="MapBackground" type="ColorRect" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_right = 3000.0
+offset_bottom = 3000.0
+color = Color(0, 0, 0, 0)
+
+[node name="Region0" type="Button" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 1079.0
+offset_right = 785.0
+offset_bottom = 1211.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "地區"
+
+[node name="Region1" type="Button" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_left = 1266.0
+offset_top = 468.0
+offset_right = 1746.0
+offset_bottom = 600.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "地區"
+
+[node name="Region2" type="Button" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_left = 1327.0
+offset_top = 1919.0
+offset_right = 1807.0
+offset_bottom = 2051.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "地區"
+
+[node name="Region3" type="Button" parent="VBox/MapViewport/MapRoot"]
+layout_mode = 0
+offset_left = 2255.0
+offset_top = 1028.0
+offset_right = 2735.0
+offset_bottom = 1160.0
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 28
+text = "地區"
+
+[node name="DurationModal" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="DurationModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.55)
+
+[node name="CenterContainer" type="CenterContainer" parent="DurationModal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="DurationModal/CenterContainer"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="DurationModal/CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="DurationModal/CenterContainer/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="DurationModal/CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 32
+text = "選擇掛機時長"
+horizontal_alignment = 1
+
+[node name="DurationGrid" type="GridContainer" parent="DurationModal/CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="CancelButton" type="Button" parent="DurationModal/CenterContainer/Panel/Margin/VBox"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 26
+text = "取消"

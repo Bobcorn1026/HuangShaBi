@@ -68,40 +68,40 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="BottomNav" type="HBoxContainer" parent="MainVBox" unique_id=56677609]
-custom_minimum_size = Vector2(0, 108)
+custom_minimum_size = Vector2(0, 192)
 layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="NavButton1" type="TextureButton" parent="MainVBox/BottomNav" unique_id=1840425536]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(112, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("2_1wiy7")
 stretch_mode = 5
 
 [node name="NavButton2" type="TextureButton" parent="MainVBox/BottomNav" unique_id=1702765017]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(112, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("3_u1u68")
 stretch_mode = 5
 
 [node name="NavButton3" type="TextureButton" parent="MainVBox/BottomNav" unique_id=782207458]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("4_x537r")
 stretch_mode = 5
 
 [node name="NavButton4" type="TextureButton" parent="MainVBox/BottomNav" unique_id=322368222]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(112, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("5_cfq0f")
 stretch_mode = 5
 
 [node name="NavButton5" type="TextureButton" parent="MainVBox/BottomNav" unique_id=2053199877]
-custom_minimum_size = Vector2(56, 56)
+custom_minimum_size = Vector2(112, 56)
 layout_mode = 2
 size_flags_horizontal = 3
 texture_normal = ExtResource("6_pjux3")

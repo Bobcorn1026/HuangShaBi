@@ -10,6 +10,11 @@ var gold: int = 0
 ## 累積專注秒數（可依需求在專注結束時累加）
 var total_focus_time: float = 0.0
 
+## 進入 FocusScene 前由地圖頁設定；讀取後由 FocusScene 重設為預設。
+var next_focus_seconds: float = 25.0 * 60.0
+var next_focus_gold: int = 10
+var next_focus_region_name: String = ""
+
 
 func _ready() -> void:
 	_load_data()
@@ -34,6 +39,12 @@ func _load_data() -> void:
 		return
 	gold = int(cfg.get_value("player", "gold", 0))
 	total_focus_time = float(cfg.get_value("player", "total_focus_time", 0.0))
+
+
+func reset_default_focus_session() -> void:
+	next_focus_seconds = 25.0 * 60.0
+	next_focus_gold = 10
+	next_focus_region_name = ""
 
 
 func complete_focus_session(earned_gold: int, session_seconds: float) -> void:

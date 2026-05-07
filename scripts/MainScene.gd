@@ -1,13 +1,12 @@
 extends Control
 
-const START_MENU := "res://scenes/ui/StartMenu.tscn"
 const FOCUS_SCENE := "res://scenes/game/FocusScene.tscn"
 
-## 索引 0～4 對應按鈕 1～5；第 3 頁為主選單場景。
+## 索引 0～4 對應按鈕 1～5；第 3 頁為掛機地圖。
 const PAGE_SCENES: PackedStringArray = [
 	"res://scenes/pages/Page1.tscn",
 	"res://scenes/pages/Page2.tscn",
-	START_MENU,
+	"res://scenes/pages/Page3.tscn",
 	"res://scenes/pages/Page4.tscn",
 	"res://scenes/pages/Page5.tscn",
 ]
