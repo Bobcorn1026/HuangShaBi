@@ -1,8 +1,51 @@
-[gd_scene load_steps=2 format=3 uid="uid://mainscene01"]
+[gd_scene format=3 uid="uid://mainscene01"]
 
 [ext_resource type="Script" uid="uid://dt6mhi5nxvwnq" path="res://scripts/MainScene.gd" id="1_main"]
+[ext_resource type="Texture2D" uid="uid://b2mif461rjso6" path="res://asset/TempTexure/seven_segment_orange_01_16×16px.png" id="2_1wiy7"]
+[ext_resource type="Texture2D" uid="uid://jg488ug7d6ph" path="res://asset/TempTexure/seven_segment_orange_02_16×16px.png" id="3_u1u68"]
+[ext_resource type="Texture2D" uid="uid://cyjrw8k8mlb8u" path="res://asset/TempTexure/seven_segment_orange_03_16×16px.png" id="4_x537r"]
+[ext_resource type="Texture2D" uid="uid://dw0yju4bf3qhx" path="res://asset/TempTexure/seven_segment_orange_04_16×16px.png" id="5_cfq0f"]
+[ext_resource type="Texture2D" uid="uid://c2ye2jmns2occ" path="res://asset/TempTexure/seven_segment_orange_05_16×16px.png" id="6_pjux3"]
+[ext_resource type="Script" uid="uid://6xfhkv1y8kfp" path="res://scenes/animation_player.gd" id="7_o3jky"]
 
-[node name="MainScene" type="Control"]
+[sub_resource type="Animation" id="Animation_kp0ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NavButton5:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(204, 108)]
+}
+
+[sub_resource type="Animation" id="Animation_08o8g"]
+resource_name = "放大（按鈕）"
+length = 7.133333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NavButton5:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6.9666667),
+"transitions": PackedFloat32Array(4.756828, 50),
+"update": 0,
+"values": [Vector2(204, 108), Vector2(204, 108)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0cxu4"]
+_data = {
+&"RESET": SubResource("Animation_kp0ql"),
+&"放大（按鈕）": SubResource("Animation_08o8g")
+}
+
+[node name="MainScene" type="Control" unique_id=1067798962]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
-[node name="MainVBox" type="VBoxContainer" parent="."]
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=1810053812]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,38 +63,51 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 0
 
-[node name="ContentContainer" type="Control" parent="MainVBox"]
+[node name="ContentContainer" type="Control" parent="MainVBox" unique_id=251926462]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="BottomNav" type="HBoxContainer" parent="MainVBox"]
+[node name="BottomNav" type="HBoxContainer" parent="MainVBox" unique_id=56677609]
 custom_minimum_size = Vector2(0, 108)
 layout_mode = 2
 theme_override_constants/separation = 16
-alignment = 1
 
-[node name="NavButton1" type="Button" parent="MainVBox/BottomNav"]
+[node name="NavButton1" type="TextureButton" parent="MainVBox/BottomNav" unique_id=1840425536]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-text = "1"
+size_flags_horizontal = 3
+texture_normal = ExtResource("2_1wiy7")
+stretch_mode = 5
 
-[node name="NavButton2" type="Button" parent="MainVBox/BottomNav"]
+[node name="NavButton2" type="TextureButton" parent="MainVBox/BottomNav" unique_id=1702765017]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-text = "2"
+size_flags_horizontal = 3
+texture_normal = ExtResource("3_u1u68")
+stretch_mode = 5
 
-[node name="NavButton3" type="Button" parent="MainVBox/BottomNav"]
+[node name="NavButton3" type="TextureButton" parent="MainVBox/BottomNav" unique_id=782207458]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "3"
+size_flags_horizontal = 3
+texture_normal = ExtResource("4_x537r")
+stretch_mode = 5
 
-[node name="NavButton4" type="Button" parent="MainVBox/BottomNav"]
+[node name="NavButton4" type="TextureButton" parent="MainVBox/BottomNav" unique_id=322368222]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-text = "4"
+size_flags_horizontal = 3
+texture_normal = ExtResource("5_cfq0f")
+stretch_mode = 5
 
-[node name="NavButton5" type="Button" parent="MainVBox/BottomNav"]
+[node name="NavButton5" type="TextureButton" parent="MainVBox/BottomNav" unique_id=2053199877]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
-text = "5"
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_pjux3")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainVBox/BottomNav/NavButton5" unique_id=1151923775]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_0cxu4")
+script = ExtResource("7_o3jky")

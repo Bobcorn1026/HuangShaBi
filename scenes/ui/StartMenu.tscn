@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://startmenu01"]
+[gd_scene format=3 uid="uid://startmenu01"]
 
 [ext_resource type="Script" uid="uid://c5k6tlep8bvcd" path="res://scenes/ui/StartMenu.gd" id="1_sm"]
 
-[node name="StartMenu" type="Control"]
+[node name="StartMenu" type="Control" unique_id=316107348]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1445351987]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,17 +26,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="VBoxContainer" unique_id=209412845]
 layout_mode = 2
 text = "番茄專注"
 horizontal_alignment = 1
 
-[node name="GoldLabel" type="Label" parent="VBoxContainer"]
+[node name="GoldLabel" type="Label" parent="VBoxContainer" unique_id=1431796076]
 layout_mode = 2
 text = "金幣：0"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1626726935]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 mouse_default_cursor_shape = 2
