@@ -12,14 +12,16 @@ const PAGE_SCENES: PackedStringArray = [
 ]
 
 const HOME_PAGE_INDEX := 2
+const PRESS_SCALE := 1.15
 
 @onready var _content: Control = $MainVBox/ContentContainer
 @onready var _bottom_nav: HBoxContainer = $MainVBox/BottomNav
 
 var _nav_button_group: ButtonGroup
-var _nav_buttons: Array[Button] = []
+var _nav_buttons: Array[BaseButton] = []
 var _current_page_index: int = HOME_PAGE_INDEX
 var _focus_mode: bool = false
+var _press_tweens: Dictionary = {}
 
 
 func _ready() -> void:
@@ -27,15 +29,33 @@ func _ready() -> void:
 	_nav_button_group = ButtonGroup.new()
 	_nav_button_group.allow_unpress = false
 	for i in PAGE_SCENES.size():
-		var btn := _bottom_nav.get_node_or_null("NavButton%d" % (i + 1)) as Button
+		var btn := _bottom_nav.get_node_or_null("NavButton%d" % (i + 1)) as BaseButton
 		if btn == null:
 			push_error("MainScene: missing NavButton%d" % (i + 1))
 			continue
 		btn.toggle_mode = true
 		btn.button_group = _nav_button_group
 		btn.pressed.connect(_on_nav_pressed.bind(i))
+		if btn is TextureButton:
+			btn.pressed.connect(_animate_texture_button_press.bind(btn as TextureButton))
 		_nav_buttons.append(btn)
 	_go_to_page(HOME_PAGE_INDEX)
+
+
+func _animate_texture_button_press(btn: TextureButton) -> void:
+	if btn == null:
+		return
+	if _press_tweens.has(btn):
+		var old_tween := _press_tweens[btn] as Tween
+		if old_tween != null and old_tween.is_valid():
+			old_tween.kill()
+	btn.pivot_offset = btn.size * 0.5
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(btn, "scale", Vector2.ONE * PRESS_SCALE, 0.08)
+	tween.tween_property(btn, "scale", Vector2.ONE, 0.14)
+	_press_tweens[btn] = tween
 
 
 func go_to_start_menu() -> void:

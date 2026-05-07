@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emvq1xfwqv6"
-path="res://.godot/imported/crouch_attacks.png-422e03170700a702adadfe0e51f0516f.ctex"
+uid="uid://cvuqj7t3rhilm"
+path="res://.godot/imported/ChatGPT Image 2026年5月7日 上午08_26_59.png-6741117c7133dcce5064301cbbac52d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/character/mine/crouch_attacks.png"
-dest_files=["res://.godot/imported/crouch_attacks.png-422e03170700a702adadfe0e51f0516f.ctex"]
+source_file="res://asset/ChatGPT Image 2026年5月7日 上午08_26_59.png"
+dest_files=["res://.godot/imported/ChatGPT Image 2026年5月7日 上午08_26_59.png-6741117c7133dcce5064301cbbac52d2.ctex"]
 
 [params]
 
