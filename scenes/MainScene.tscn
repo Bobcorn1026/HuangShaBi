@@ -54,6 +54,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_main")
 
+[node name="CoinHUD" type="PanelContainer" parent="." unique_id=1620447395]
+z_index = 2
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 72.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CoinHUD" unique_id=214711745]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CoinHUD/MarginContainer" unique_id=1802343388]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CoinHUD/MarginContainer/HBoxContainer" unique_id=1027297884]
+layout_mode = 2
+text = "金幣"
+
+[node name="Value" type="Label" parent="CoinHUD/MarginContainer/HBoxContainer" unique_id=1948450307]
+layout_mode = 2
+text = "0"
+
 [node name="MainVBox" type="VBoxContainer" parent="." unique_id=1810053812]
 layout_mode = 1
 anchors_preset = 15

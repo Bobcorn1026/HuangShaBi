@@ -16,6 +16,7 @@ const PRESS_SCALE := 1.15
 
 @onready var _content: Control = $MainVBox/ContentContainer
 @onready var _bottom_nav: HBoxContainer = $MainVBox/BottomNav
+@onready var _coin_hud: Control = $CoinHUD
 
 var _nav_button_group: ButtonGroup
 var _nav_buttons: Array[BaseButton] = []
@@ -68,6 +69,16 @@ func go_to_focus() -> void:
 	_focus_mode = true
 	_bottom_nav.visible = false
 	_switch_content_to(FOCUS_SCENE)
+
+
+func set_coin_hud_visible(visible: bool) -> void:
+	if _coin_hud:
+		_coin_hud.visible = visible
+
+
+func toggle_coin_hud_visible() -> void:
+	if _coin_hud:
+		_coin_hud.visible = not _coin_hud.visible
 
 
 func _on_nav_pressed(page_index: int) -> void:
