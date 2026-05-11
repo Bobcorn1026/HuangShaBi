@@ -4,6 +4,72 @@
 [ext_resource type="Texture2D" uid="uid://0qc4r5jeilyg" path="res://asset/TempTexure/ChatGPT Image 2026年5月7日 上午10_49_38.png" id="2_8kico"]
 [ext_resource type="FontFile" uid="uid://bgsy5idubh3xg" path="res://asset/font/Cubic_11.ttf" id="3_8kico"]
 
+[sub_resource type="Animation" id="Animation_8kico"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_u8jo8"]
+resource_name = "menu_arise"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 3),
+"update": 0,
+"values": [1920.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_g8473"]
+resource_name = "menu_arise"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(2, 3),
+"update": 0,
+"values": [0.0, 1920.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8473"]
+_data = {
+&"RESET": SubResource("Animation_8kico"),
+&"menu_ascend": SubResource("Animation_u8jo8"),
+&"menu_descend": SubResource("Animation_g8473")
+}
+
 [node name="Page4" type="Control" unique_id=1293823641]
 layout_mode = 3
 anchors_preset = 15
@@ -23,7 +89,7 @@ anchor_bottom = 0.5
 offset_left = -540.0
 offset_top = -960.0
 offset_right = 540.0
-offset_bottom = 852.0
+offset_bottom = 865.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -40,10 +106,12 @@ texture = ExtResource("2_8kico")
 stretch_mode = 6
 
 [node name="PageContent" type="VBoxContainer" parent="." unique_id=2065294414]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 0.0024414063
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -61,6 +129,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 
+[node name="MenuBackgroundImage" type="TextureRect" parent="PageContent/MenuOverlay/MenuContent/MenuBackground" unique_id=1129130143]
+layout_mode = 0
+offset_top = 5.0
+offset_right = 1080.0
+offset_bottom = 1925.0
+mouse_filter = 2
+texture = ExtResource("2_8kico")
+stretch_mode = 6
+
 [node name="HeaderBar" type="HBoxContainer" parent="PageContent/MenuOverlay/MenuContent" unique_id=9999]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -69,7 +146,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 72
 text = "重新出發"
 horizontal_alignment = 1
 
@@ -84,7 +161,7 @@ text = "✕"
 [node name="DrawerSubtitle" type="Label" parent="PageContent/MenuOverlay/MenuContent" unique_id=1439754357]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 32
 text = "重新開始時，先把開局節奏調順。"
 horizontal_alignment = 1
 
@@ -92,6 +169,9 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 theme_override_constants/separation = 50
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PageContent/MenuOverlay" unique_id=2139806994]
+libraries/ = SubResource("AnimationLibrary_g8473")
 
 [node name="DrawerHost" type="MarginContainer" parent="PageContent" unique_id=1071467352]
 visible = false
@@ -110,15 +190,15 @@ anchor_top = 0.14
 anchor_right = 0.411
 anchor_bottom = 0.14
 offset_left = 0.11999512
-offset_top = -79.79999
+offset_top = -95.79999
 offset_right = 316.12
-offset_bottom = 394.2
+offset_bottom = 378.2
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "重新出發"
 autowrap_mode = 3
 autowrap_trim_flags = 0
@@ -126,31 +206,31 @@ autowrap_trim_flags = 0
 [node name="MilestoneButton" type="Button" parent="." unique_id=1519669324]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 0
-offset_left = 16.0
-offset_top = 781.0
-offset_right = 321.0
-offset_bottom = 1065.0
+offset_left = 32.0
+offset_top = 749.0
+offset_right = 337.0
+offset_bottom = 1033.0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "里程碑"
 
 [node name="ToolButton" type="Button" parent="." unique_id=2024992658]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 0
 offset_left = 792.0
-offset_top = 648.0
+offset_top = 640.0
 offset_right = 1040.0
-offset_bottom = 1064.0
+offset_bottom = 1056.0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "工具"
 
 [node name="LevelButton" type="Button" parent="." unique_id=1225979266]
@@ -170,7 +250,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_pressed_color = Color(0.8, 0.8, 0.8, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_8kico")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 48
 text = "等級"
 
 [connection signal="pressed" from="PageContent/MenuOverlay/MenuContent/HeaderBar/CloseButton" to="." method="_on_close_menu"]

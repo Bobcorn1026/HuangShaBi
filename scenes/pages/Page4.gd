@@ -17,15 +17,19 @@ const DRAWER_SUBTITLE_FONT_SIZE := 64
 # 預載入要套用的字體資源（對應 scenes/pages/Page4.tscn 中的 ExtResource id 3_8kico）
 const OPTION_FONT := preload("res://asset/font/Cubic_11.ttf")
 
+
 # 各種升級模式的靜態資料：包含標題、子標題與選項文字
 const UPGRADE_MODES := {
 	"restart": {
 		"title": "重新出發",
-		"subtitle": "重新開始時，先把開局節奏調順。",
+		"subtitle": "重置所有資源及升級",
 		"items": [
-			"開局金幣 +10",
-			"基礎回復 +1",
-			"初始冷卻 -5%",
+			"回到起點",
+			"金錢收獲 +10%",
+			"素材收獲 +10%",
+			"最大中離時間 +10s",
+			"心流倍率 +10%",
+			"最高心流層數 +1",
 		],
 	},
 	"milestone": {
@@ -64,7 +68,10 @@ const UPGRADE_MODES := {
 @onready var _drawer_subtitle: Label = $PageContent/MenuOverlay/MenuContent/DrawerSubtitle
 @onready var _option_list: VBoxContainer = $PageContent/MenuOverlay/MenuContent/OptionList
 @onready var _menu_background: Panel = $PageContent/MenuOverlay/MenuContent/MenuBackground
+@onready var _overlay_anim_player: AnimationPlayer = $PageContent/MenuOverlay/AnimationPlayer
 
+const OVERLAY_SHOW_ANIM := &"menu_ascend"  # 預設的菜單顯示動畫名稱
+const OVERLAY_HIDE_ANIM := &"menu_descend"
 # 四個頂部模式按鈕的節點集合，方便透過字串找到對應按鈕
 @onready var _mode_buttons := {
 	"restart": $RestartButton,
@@ -72,20 +79,38 @@ const UPGRADE_MODES := {
 	"tool": $ToolButton,
 	"level": $LevelButton,
 }
-
-# 儲存菜單動畫的 Tween 物件與初始位置
-var _menu_tween: Tween
-var _menu_base_offset_top: float  # 菜單隱藏時的位置（初始值，通常在屏幕下方）
-var _menu_shown_offset_top: float  # 菜單顯示時的目標位置
 # 儲存各按鈕的原始文字，以便隱藏/顯示時使用
 var _button_original_texts: Dictionary = {}
 
 
-func _ready() -> void:
-	# 初始化：記錄菜單的隱藏位置（初始位置）與計算顯示位置
-	_menu_base_offset_top = _menu_overlay.offset_top  # 1920（屏幕下方）
-	_menu_shown_offset_top = 0.0  # 菜單顯示時應該在頂部（相對於 PageContent）
+func load_player_data():
+	# 1. 開啟檔案（res:// 代表專案資源目錄，user:// 代表可讀寫的使用者目錄）
+	var file = FileAccess.open("user://Data.json", FileAccess.READ)
+	if file == null:
+		printerr("無法開啟檔案")
+		return
+	
+	# 2. 取得全部文字
+	var json_text = file.get_as_text()
+	file.close()
+	
+	# 3. 建立 JSON 解析器
+	var json = JSON.new()
+	var error = json.parse(json_text)   # 回傳 Error 型態 (OK = 0)
+	
+	if error != OK:
+		printerr("JSON 解析失敗: ", json.get_error_message(), " 在第 ", json.get_error_line(), " 行")
+		return
+	
+	# 4. 取得解析後的資料 (Variant，通常自動轉成 Dictionary 或 Array)
+	var data = json.data   # 這會是字典
+	
+	# 5. 取出欄位
+	var gold = data["gold"]
 
+
+
+func _ready() -> void:
 	# 預設隱藏菜單
 	_menu_overlay.visible = false
 	
@@ -139,6 +164,15 @@ func _on_mode_button_pressed(mode: String) -> void:
 	_show_mode(mode, true)
 
 
+func _play_overlay_animation(animation_name: StringName) -> void:
+	# 安全地播放你新增的 AnimationPlayer 動畫（若不存在則略過）
+	if _overlay_anim_player == null:
+		return
+	if not _overlay_anim_player.has_animation("menu_ascend"):
+		return
+	_overlay_anim_player.play("menu_ascend")
+
+
 func _show_mode(mode: String, animate: bool) -> void:
 	# 根據模式名稱載入對應的資料並更新菜單內容
 	if not UPGRADE_MODES.has(mode):
@@ -154,7 +188,10 @@ func _show_mode(mode: String, animate: bool) -> void:
 		# 直接顯示菜單，不播放動畫
 		_hide_mode_buttons_text()
 		_menu_overlay.visible = true
-		_menu_overlay.offset_top = _menu_shown_offset_top
+		if _overlay_anim_player != null and _overlay_anim_player.has_animation(OVERLAY_SHOW_ANIM):
+			_overlay_anim_player.play(OVERLAY_SHOW_ANIM)
+			_overlay_anim_player.seek(_overlay_anim_player.current_animation_length, true)
+			_overlay_anim_player.stop()
 
 
 func _refresh_option_list(items: Array) -> void:
@@ -168,46 +205,39 @@ func _refresh_option_list(items: Array) -> void:
 		option_button.add_theme_font_override("font", OPTION_FONT)
 		option_button.text = str(item)
 		# 設定選項按鈕的最小高度，避免過小難以點擊
-		#option_button.custom_minimum_size = Vector2(0, OPTION_BUTTON_MIN_HEIGHT)
+		
+		option_button.custom_minimum_size = Vector2(0, OPTION_BUTTON_MIN_HEIGHT)
 		# 設定選項按鈕字級，讓抽屜內文字更大易讀
 		option_button.add_theme_font_size_override("font_size", OPTION_BUTTON_FONT_SIZE)
-		option_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		# 讓按鈕水平填滿父容器，並將文字置中
+		option_button.size_flags_horizontal = 3
+		option_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		_option_list.add_child(option_button)
 
 
 func _play_menu_animation_show() -> void:
-	# 若已有進行中的 tween，先終止再建立新的動畫
-	if _menu_tween != null and _menu_tween.is_valid():
-		_menu_tween.kill()
+	if _overlay_anim_player != null and _overlay_anim_player.is_playing():
+		_overlay_anim_player.stop()
 
 	# 隱藏頂部按鈕的文字
 	_hide_mode_buttons_text()
-	
-	# 顯示菜單並從下方向上彈出
+
+	# 顯示菜單並播放顯示動畫
 	_menu_overlay.visible = true
-	_menu_overlay.offset_top = _menu_base_offset_top  # 從隱藏位置開始
-	_menu_overlay.modulate.a = 0.0
-	_menu_tween = create_tween()
-	_menu_tween.set_trans(Tween.TRANS_QUAD)
-	_menu_tween.set_ease(Tween.EASE_OUT)
-	_menu_tween.parallel().tween_property(_menu_overlay, "offset_top", _menu_shown_offset_top, 0.3)
-	_menu_tween.parallel().tween_property(_menu_overlay, "modulate:a", 1.0, 0.3)
-	await _menu_tween.finished
+	if _overlay_anim_player != null and _overlay_anim_player.has_animation(OVERLAY_SHOW_ANIM):
+		_overlay_anim_player.play(OVERLAY_SHOW_ANIM)
+		await _overlay_anim_player.animation_finished
 
 
 func _play_menu_animation_hide() -> void:
-	# 若已有進行中的 tween，先終止再建立新的動畫
-	if _menu_tween != null and _menu_tween.is_valid():
-		_menu_tween.kill()
+	if _overlay_anim_player != null and _overlay_anim_player.is_playing():
+		_overlay_anim_player.stop()
 
-	# 菜單從上向下滑出並隱藏，回到屏幕下方
-	_menu_tween = create_tween()
-	_menu_tween.set_trans(Tween.TRANS_QUAD)
-	_menu_tween.set_ease(Tween.EASE_IN)
-	_menu_tween.parallel().tween_property(_menu_overlay, "offset_top", _menu_base_offset_top, 0.3)
-	_menu_tween.parallel().tween_property(_menu_overlay, "modulate:a", 0.0, 0.3)
-	await _menu_tween.finished
+	# 播放收合動畫
+	if _overlay_anim_player != null and _overlay_anim_player.has_animation(OVERLAY_HIDE_ANIM):
+		_overlay_anim_player.play(OVERLAY_HIDE_ANIM)
+		await _overlay_anim_player.animation_finished
 	_menu_overlay.visible = false
 	
 	# 菜單隱藏後，恢復頂部按鈕的文字
